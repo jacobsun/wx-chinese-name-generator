@@ -1,0 +1,37 @@
+<view id="cloak" wx:if="{{showCloak}}">
+  <view class="loader"></view>
+</view>
+<view class="container">
+  <view class="header">
+    <view id="filters-info">
+      当前字库大小:
+      <text>{{ charCounts }}</text>
+    </view>
+    <input type="text" bind:change="onChangeSurname" value="{{surname}}" name="surname" id="surname" placeholder="姓 非必需" />
+    <input type="text" bind:change="onChangeFiltersStr" value="{{filters}}" name="filters" id="filters" placeholder="黑名单 如: b si hei" title="输入拼音字母, 以空格分隔, 可过滤掉字" />
+    <button type="submit" bind:tap="onSubmit">生成</button>
+  </view>
+  <view class="main" bind:tap="bookmarkName">
+    <a wx:for="{{names}}" wx:key="*this" class="name {{animating === ('item'+index) ? 'animate' : ''}}" id="{{'item' + index}}" href="#" data-name="{{item}}">
+      {{item}}
+    </a>
+  </view>
+  <view class="pocket {{showBookmark ? 'active' : ''}}">
+    <button class="toggle-pocket" bind:tap="toggleBookmark">
+      <i></i>
+    </button>
+    <view class="content">
+      <view class="fav" bind:tap="unbookmarkName">
+        <a wx:if="{{favNames.length === 0}}" class="fav-name" href="#">点击上面的名字来收藏于此处</a>
+        <block wx:else>
+          <a wx:for="{{favNames}}" wx:key="*this" class="fav-name" href="#" data-favName="{{item}}">
+            {{item}}
+          </a>
+        </block>
+      </view>
+      <view class="footer">
+        <text>作者: 3349894411@qq.com</text>
+      </view>
+    </view>
+  </view>
+</view>
